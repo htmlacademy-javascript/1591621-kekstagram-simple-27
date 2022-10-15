@@ -18,22 +18,16 @@ const getRandomIntInclusive = (min, max) => {
 };
 getRandomIntInclusive(1,10);
 
-const COMMENT_STRING = 'мопс';
-const getCommentlength = (COMMENT_STRING, mnlen, mxlen) => {
-  if (typeof mnlen === 'number' && typeof mxlen === 'number' && typeof COMMENT_STRING === 'string') {
-    return true;
-  }
-  else {
-    return false;
-  }
-  if (COMMENT_STRING.length < mnlen || COMMENT_STRING.length > mxlen) {
+const getCommentlength = (commentString, mnLen, mxLen) => {
+  if (typeof mnLen !=='number' && typeof mxLen !== 'number' && typeof commentString !== 'string' && commentString.length < mnLen || commentString.length > mxLen) {
     return false;
   }
   else {
     return true;
   }
 };
-getCommentlength(COMMENT_STRING,2,4);
+
+getCommentlength(commentString,2,4);
 /*
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
