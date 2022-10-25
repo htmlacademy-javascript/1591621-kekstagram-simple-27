@@ -28,17 +28,19 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(result);
 };
 const createPost = () => (
-  { id: getRandomIntInclusive(1, 25),
-    url: `photos/${getRandomIntInclusive(1, 25)}.jpg`,
+  { 
     description: DESCRIPTION[getRandomIntInclusive(0, DESCRIPTION.length - 1)],
     likes: getRandomIntInclusive(15, 200),
     comments: getRandomIntInclusive(0, 200),
   }
 );
 
-const similarPosts = Array.from({length: SIMILAR_POST_COUNT}, createPost);
+const getsimilarPosts = () => (Array.from({length: SIMILAR_POST_COUNT}, createPost));
 
-similarPosts();
+getsimilarPosts();
+
+let arraySimilarPosts = getsimilarPosts();
+ arraySimilarPosts.map((item,index) => ({ ...item, id: index, url: `photos/${index}.jpg`}));
 
 /*
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
