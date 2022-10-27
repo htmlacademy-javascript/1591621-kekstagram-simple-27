@@ -1,4 +1,13 @@
 /*eslint-disable no-alert*/
+
+const SIMILAR_POST_COUNT = 25;
+const DESCRIPTION = [
+  'фото кота',
+  'фото собаки',
+  'фото девушки с цветами',
+  'фото праздничного торта',
+];
+
 const getRandomIntInclusive = (min, max) => {
   if (min < 0) {
     alert('Поменяйте первый параметр, значение минимума');
@@ -12,22 +21,29 @@ const getRandomIntInclusive = (min, max) => {
     alert('Поменяйте один из параметров, чтобы минимум был меньше максимума');
     return NaN;
   }
+
   min = Math.ceil(min);
   max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  const result = Math.random() * (max - min + 1) + min;
+  return Math.floor(result);
 };
-getRandomIntInclusive(1,10);
-
-const getCommentlength = (commentString, mnLen, mxLen) => {
-  if (typeof mnLen !== 'number' && typeof mxLen !== 'number' && typeof commentString !== 'string' && commentString.length < mnLen || commentString.length > mxLen) {
-    return false;
+const createPost = () => (
+  { 
+    description: DESCRIPTION[getRandomIntInclusive(0, DESCRIPTION.length - 1)],
+    likes: getRandomIntInclusive(15, 200),
+    comments: getRandomIntInclusive(0, 200),
   }
-  else {
-    return true;
-  }
-};
+);
 
-getCommentlength('мопс',2,4);
+const getsimilarPosts = () => {
+   const similarPosts = Array.from({length: SIMILAR_POST_COUNT}, createPost);
+   const result = similarPosts.map((item,index) => ({ ...item, id: index + 1, url: `photos/${index + 1}.jpg`}));
+  return result;
+}
+
+getsimilarPosts();
+
+
 /*
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
