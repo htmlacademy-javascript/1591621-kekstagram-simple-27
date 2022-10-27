@@ -1,6 +1,6 @@
 /*eslint-disable no-alert*/
 
-const SIMILAR_POST_COUNT = 5;
+const SIMILAR_POST_COUNT = 25;
 const DESCRIPTION = [
   'фото кота',
   'фото собаки',
@@ -35,12 +35,14 @@ const createPost = () => (
   }
 );
 
-const getsimilarPosts = () => (Array.from({length: SIMILAR_POST_COUNT}, createPost));
+const getsimilarPosts = () => {
+   const similarPosts = Array.from({length: SIMILAR_POST_COUNT}, createPost);
+   const result = similarPosts.map((item,index) => ({ ...item, id: index + 1, url: `photos/${index + 1}.jpg`}));
+  return result;
+}
 
 getsimilarPosts();
 
-let arraySimilarPosts = getsimilarPosts();
- arraySimilarPosts.map((item,index) => ({ ...item, id: index, url: `photos/${index}.jpg`}));
 
 /*
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
