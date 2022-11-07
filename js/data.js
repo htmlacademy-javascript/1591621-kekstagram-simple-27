@@ -23,3 +23,4 @@ const getsimilarPosts = () => {
   return result;
 };
 getsimilarPosts();
+export {getsimilarPosts};
