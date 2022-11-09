@@ -1,8 +1,7 @@
 import {getsimilarPosts} from './data.js';
 
 const createPhoto = () => {
-  const photoTemplate = document.querySelector('#picture');
-  photoTemplate.querySelector('.picture');
+  const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
   const photos = getsimilarPosts();
   const photoListSection = document.querySelector('.pictures');

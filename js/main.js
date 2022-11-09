@@ -1,2 +1,2 @@
-import './data';
-import './createphoto';
+import '/Users/Anna/kekstagram-simple/js/data.js';
+import './createphoto.js';
