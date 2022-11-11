@@ -1,4 +1,4 @@
-import {getRandomIntInclusive} from './util';
+import {getRandomIntInclusive} from './util.js';
 
 /*eslint-disable no-alert*/
 
@@ -23,3 +23,4 @@ const getsimilarPosts = () => {
   return result;
 };
 getsimilarPosts();
+export {getsimilarPosts};
