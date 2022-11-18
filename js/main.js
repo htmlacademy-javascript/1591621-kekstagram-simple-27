@@ -1,2 +1,5 @@
-import '/Users/Anna/kekstagram-simple/js/data.js';
-import './createphoto.js';
+import './data.js';
+import './picture.js';
+import './form.js';
+import './scale.js';
+import './effect.js';

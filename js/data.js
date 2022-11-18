@@ -1,4 +1,4 @@
-import {getRandomIntInclusive} from './util.js';
+import { getRandomNumber } from './util.js';
 
 /*eslint-disable no-alert*/
 
@@ -11,9 +11,9 @@ const DESCRIPTION = [
 ];
 
 const createPost = () => (
-  { description: DESCRIPTION[getRandomIntInclusive(0, DESCRIPTION.length - 1)],
-    likes: getRandomIntInclusive(15, 200),
-    comments: getRandomIntInclusive(0, 200),
+  { description: DESCRIPTION[getRandomNumber(0, DESCRIPTION.length - 1)],
+    likes: getRandomNumber(15, 200),
+    comments: getRandomNumber(0, 200),
   }
 );
 
@@ -23,4 +23,4 @@ const getsimilarPosts = () => {
   return result;
 };
 getsimilarPosts();
-export {getsimilarPosts};
+export { getsimilarPosts };

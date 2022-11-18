@@ -1,5 +1,5 @@
 /*eslint-disable no-alert*/
-const getRandomIntInclusive = (min, max) => {
+const getRandomNumber = (min, max) => {
   if (min < 0) {
     alert('Поменяйте первый параметр, значение минимума');
     return NaN;
@@ -18,6 +18,8 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(result);
 };
 
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
 /*
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
@@ -28,4 +30,4 @@ function getRandomIntInclusive(min, max) {
 }
 http://kodesource.top/javascript/form/string-length.php
 */
-export {getRandomIntInclusive};
+export { getRandomNumber, isEscapeKey };

@@ -1,8 +1,7 @@
-import {getsimilarPosts} from './data.js';
+import { getsimilarPosts } from './data.js';
 
 const createPhoto = () => {
   const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
   const photos = getsimilarPosts();
   const photoListSection = document.querySelector('.pictures');
   const photosListFragment = document.createDocumentFragment();
@@ -15,5 +14,5 @@ const createPhoto = () => {
   });
   photoListSection.append(photosListFragment);
 };
-export {createPhoto};
+export { createPhoto };
 
