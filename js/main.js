@@ -1,5 +1,8 @@
-import './data.js';
-import './picture.js';
-import './form.js';
-import './scale.js';
-import './effect.js';
+import './data';
+import './picture';
+import './form';
+import './scale';
+import './effect';
+import './api';
+import './message';
+
