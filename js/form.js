@@ -1,18 +1,16 @@
-import { isEscapeKey } from './util.js';
 import { resetScale } from './scale.js';
-import { resetEffects } from './effect.js';
+import { resetEffect,form } from './effect.js';
 import { sendData } from './api.js';
-import { showSuccessMessage, showErrorMessage} from './message.js';
+import { showSuccessMessage, showErrorMessage, onMessageEscKeydown} from './message.js';
 
-const uploadForm = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const formButton = document.querySelector('img-upload__submit');
 
-const pristine = new Pristine (uploadForm, {
-  classTo: 'iimg-upload__text',
+const pristine = new Pristine (form, {
+  classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
   errorTextClass: 'img-upload__text--error-text',
 });
@@ -30,24 +28,17 @@ const blockSubmitButton = () => {
 const showModal = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
-  document.addEventListener('keydown', onEscKeydown);
+  document.addEventListener('keydown', onMessageEscKeydown);
 };
 
 const closeModal = () => {
-  uploadForm.reset();
+  form.reset();
   resetScale();
-  resetEffects();
+  resetEffect();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  document.removeEventListener('keydown', onEscKeydown);
-};
-
-const onEscKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeModal();
-  }
+  document.removeEventListener('keydown', onMessageEscKeydown);
 };
 
 fileField.addEventListener('change', (evt) => {
@@ -62,7 +53,7 @@ cancelButton.addEventListener('click', (evt) => {
 });
 
 const onUserFormSubmit = (onSuccess) => {
-  uploadForm.addEventListener('submit', (evt) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
@@ -83,4 +74,4 @@ const onUserFormSubmit = (onSuccess) => {
   });
 };
 
-export { onUserFormSubmit };
+export { onUserFormSubmit, closeModal };
