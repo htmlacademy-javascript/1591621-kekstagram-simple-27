@@ -1,19 +1,31 @@
 import { isEscapeKey } from './util.js';
 import { resetScale } from './scale.js';
 import { resetEffects } from './effect.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage} from './message.js';
 
-const form = document.querySelector('.img-upload__form');
+const uploadForm = document.querySelector('.img-upload__form');
 const overlay = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
 const cancelButton = document.querySelector('#upload-cancel');
 const fileField = document.querySelector('#upload-file');
 const formButton = document.querySelector('img-upload__submit');
 
-const pristine = new Pristine (form, {
-  classTo: 'img-upload__field-wrapper',
-  errorTextParent: 'img-upload__field-wrapper',
-  errorTextClass: 'img-upload__field-wrapper__error',
+const pristine = new Pristine (uploadForm, {
+  classTo: 'iimg-upload__text',
+  errorTextParent: 'img-upload__text',
+  errorTextClass: 'img-upload__text--error-text',
 });
+
+const unBlockSubmitButton = () => {
+  formButton.disabled = false;
+  formButton.textContent = 'Опубликовать';
+};
+
+const blockSubmitButton = () => {
+  formButton.disabled = true;
+  formButton.textContent = 'Публикуем..';
+};
 
 const showModal = () => {
   overlay.classList.remove('hidden');
@@ -22,7 +34,7 @@ const showModal = () => {
 };
 
 const closeModal = () => {
-  form.reset();
+  uploadForm.reset();
   resetScale();
   resetEffects();
   pristine.reset();
@@ -49,7 +61,26 @@ cancelButton.addEventListener('click', (evt) => {
   closeModal();
 });
 
-formButton.addEventListener('submit',(evt) => {
-  evt.preventDefault();
-  const isValid = pristine.validate();
-})
+const onUserFormSubmit = (onSuccess) => {
+  uploadForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      sendData(
+        () => {
+          onSuccess();
+          unBlockSubmitButton();
+          showSuccessMessage();
+        },
+        (text) => {
+          showErrorMessage(text);
+          unBlockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
+    }
+  });
+};
+
+export { onUserFormSubmit };
