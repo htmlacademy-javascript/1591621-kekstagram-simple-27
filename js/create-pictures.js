@@ -1,17 +1,15 @@
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const picturesContainer = document.querySelector('.pictures');
-
-const createPictures = (similarPictures) => {
-  const similarListFragment = document.createDocumentFragment();
-  similarPictures.forEach(({url, likes, comments}) => {
-    const pictureElement = pictureTemplate.cloneNode(true);
-    pictureElement.querySelector('.picture__img').src = url;
-    pictureElement.querySelector('.picture__likes').textContent = likes;
-    pictureElement.querySelector('.picture__comments').textContent = comments;
-    similarListFragment.append(pictureElement);
+const createPhoto = () => {
+  const photoTemplate = document.querySelector('#picture').content.querySelector('.picture');
+  const photos = getsimilarPosts();
+  const photoListSection = document.querySelector('.pictures');
+  const photosListFragment = document.createDocumentFragment();
+  photos.forEach(({url, likes, comments}) => {
+    const photo = photoTemplate.cloneNode(true);
+    photo.querySelector('.picture__img').src = url;
+    photo.querySelector('.picture__likes').textContent = likes;
+    photo.querySelector('.picture__comments').textContent = comments;
+    photosListFragment.append(photo);
   });
-
-  picturesContainer.append(similarListFragment);
+  photoListSection.append(photosListFragment);
 };
-
-export { createPictures };
+export { createPhoto };
