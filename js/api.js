@@ -1,19 +1,13 @@
-import { showAlert } from './utils';
-
 const GET_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
 const SEND_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-const getData = (onSuccess) => {
+const getData = (onSuccess, onFail) => {
   fetch(GET_URL)
-    .then((response) => {
-      if (response.ok) {
-        return response.json();
-      }
-      throw new Error('Ошибка загрузки данных');
-    })
-    .then((photos) => onSuccess(photos))
-    .catch((error) =>
-      showAlert(error.message));
+    .then((response) => response.json())
+    .then((data) => onSuccess(data))
+    .catch(() => {
+      onFail();
+    });
 };
 
 const sendData = (onSuccess, onFail, body) => {
@@ -26,10 +20,11 @@ const sendData = (onSuccess, onFail, body) => {
         onSuccess();
         return;
       }
-      throw new Error('Произошла ошибка отправки данных');
+
+      onFail();
     })
     .catch(() => {
-      onFail('Произошла ошибка отправки данных');
+      onFail();
     });
 };
 
