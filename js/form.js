@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { isEscapeKey } from './util.js';
 import { resetScale, initScale } from './scale.js';
 import { resetEffect, createSlider, updateSlider, onSliderUpdate, onPictureFormChange } from './effects.js';
@@ -8,19 +7,12 @@ import { showErrorMessage, showSuccessMessage } from './message.js';
 const body = document.body;
 const form = document.querySelector('#upload-select-image');
 const uploadPhoto = document.querySelector('#upload-file');
-=======
-import { resetScale } from './scale.js';
-import { resetEffect,form } from './effect.js';
-import { sendData } from './api.js';
-import { showSuccessMessage, showErrorMessage, onMessageEscKeydown} from './message.js';
->>>>>>> e776eaf375c7ee76faadee83446c966167a8ecb1
 
 const overlay = document.querySelector('.img-upload__overlay');
 const onCanselButton = document.querySelector('.img-upload__cancel');
 const effectSlider = document.querySelector('.effect-level__slider');
 const submitButton = form.querySelector('.img-upload__submit');
 
-<<<<<<< HEAD
 const pristine = new Pristine(form, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
@@ -114,8 +106,6 @@ const submitButton = imageForm.querySelector('#upload-submit');
 const imagePreview = document.querySelector('.img-upload__preview');
 const documentBody = document.querySelector('body');
 
-=======
->>>>>>> e776eaf375c7ee76faadee83446c966167a8ecb1
 const pristine = new Pristine (form, {
   classTo: 'img-upload__text',
   errorTextParent: 'img-upload__text',
@@ -222,9 +212,4 @@ const onUserFormSubmit = (onSuccess) => {
     }
   });
 };
-<<<<<<< HEAD
 */
-=======
-
-export { onUserFormSubmit, closeModal };
->>>>>>> e776eaf375c7ee76faadee83446c966167a8ecb1
