@@ -1,4 +1,5 @@
 const ALERT_SHOW_TIME = 5000;
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = (message) => {
@@ -12,10 +13,14 @@ const showAlert = (message) => {
   alertContainer.style.fontSize = '30px';
   alertContainer.style.textAlign = 'center';
   alertContainer.style.backgroundColor = 'red';
+
   alertContainer.textContent = message;
+
   document.body.append(alertContainer);
+
   setTimeout(() => {
     alertContainer.remove();
   }, ALERT_SHOW_TIME);
 };
-export { isEscapeKey, showAlert };
+
+export {isEscapeKey, showAlert};
