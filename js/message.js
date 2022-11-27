@@ -1,49 +1,49 @@
-const successMessageTemplate = document.querySelector('#success')
-  .content.querySelector('.success');
-const errorMessageTemplate = document.querySelector('#error')
-  .content.querySelector('.error');
-const bodyElement = document.querySelector('body');
+import { isEscapeKey } from './util.js';
 
-const isEscEvent = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
-
-const onErrorButtonClick = () => {
-  hideMessage();
-};
-
-const onOverlayClick = () => {
-  hideMessage();
-};
+const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorMessageTemplate = document.querySelector('#error').content.querySelector('.error');
+const onSuccessButton = successMessageTemplate.querySelector('.success__button');
+const onErrorButton = errorMessageTemplate.querySelector('.error__button');
 
 const onMessageEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
+  if(isEscapeKey(evt)) {
     evt.preventDefault();
-    hideMessage();
+    closeMessage();
   }
 };
 
+const onOverlayClick = (evt) => {
+  if(!evt.target.classList.contains('error__inner')) {
+    closeMessage();
+  }
+};
+
+const closeButtonClick = () => {
+  closeMessage();
+};
+
 const showSuccessMessage = () => {
-  const successMessageElement = successMessageTemplate.cloneNode(true);
-  document.addEventListener('keydown', onMessageEscKeydown);
+  const successMessage = successMessageTemplate.cloneNode(true);
   document.addEventListener('click', onOverlayClick);
-  bodyElement.append(successMessageElement);
-  bodyElement.style.overflow = 'hidden';
+  document.addEventListener('keydown', onMessageEscKeydown, true);
+  onSuccessButton.addEventListener('click', closeButtonClick);
+  document.body.append(successMessage);
 };
 
 const showErrorMessage = () => {
-  const errorMessageElement = errorMessageTemplate.cloneNode(true);
-  document.addEventListener('keydown', onMessageEscKeydown);
-  errorMessageElement.querySelector('.error__button').addEventListener('click', onErrorButtonClick);
-  bodyElement.append(errorMessageElement);
-  bodyElement.style.overflow = 'hidden';
+  const errorMessage = errorMessageTemplate.cloneNode(true);
+  document.addEventListener('click', onOverlayClick);
+  document.addEventListener('keydown', onMessageEscKeydown, true);
+  onErrorButton.addEventListener('click', closeButtonClick);
+  document.body.append(errorMessage);
 };
 
-function hideMessage () {
-  const messageElement =
+function closeMessage() {
+  const message =
     document.querySelector('.success') || document.querySelector('.error');
-  messageElement.remove();
-  document.removeEventListener('keydown',onMessageEscKeydown);
-  document.removeEventListener('click', onOverlayClick);
-  bodyElement.style.overflow = 'auto';
+  message.remove();
+  document.removeEventListener('click',onOverlayClick);
+  document.removeEventListener('keydown', onMessageEscKeydown, true);
 }
 
-export { showSuccessMessage, showErrorMessage };
+export {showSuccessMessage, showErrorMessage};

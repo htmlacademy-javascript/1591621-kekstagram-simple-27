@@ -1,31 +1,33 @@
+import { showAlert } from './util.js';
+
 const GET_URL = 'https://27.javascript.pages.academy/kekstagram-simple/data';
-const SEND_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
+const POST_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
-const getData = (onSuccess, onFail) => {
+const getData = (onSuccess) => {
   fetch(GET_URL)
-    .then((response) => response.json())
-    .then((data) => onSuccess(data))
+    .then((responce) => responce.json())
+    .then((photos) => {
+      onSuccess(photos);
+    })
     .catch(() => {
-      onFail();
-    });
-};
+      showAlert('При загрузке данных с сервера произошла ошибка');
+    });};
 
-const sendData = (onSuccess, onFail, body) => {
-  fetch(SEND_URL, {
-    method: 'POST',
-    body,
-  })
-    .then((response) => {
-      if (response.ok) {
+const postData = (onSuccess, onFail, body) => {
+  fetch(POST_URL,
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((responce) => {
+      if (responce.ok) {
         onSuccess();
         return;
       }
-
       onFail();
     })
-    .catch(() => {
-      onFail();
-    });
+    .catch(() => onFail());
 };
 
-export { getData, sendData };
+export {getData, postData};

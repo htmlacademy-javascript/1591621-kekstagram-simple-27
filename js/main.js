@@ -1,8 +1,11 @@
-import './data';
-import './picture';
-import './form';
-import './scale';
-import './effect';
-import './api';
-import './message';
+import { createPictures } from './create_pictures.js';
+import { initUploadPhoto } from './form.js';
+import { getData } from './api.js';
 
+const PICTURE_COUNT = 25;
+
+getData((photos) => {
+  createPictures(photos.slice(0, PICTURE_COUNT));
+});
+
+initUploadPhoto();
